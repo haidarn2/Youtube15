@@ -13,8 +13,9 @@ Based on the Spoti15 source code.
 + <500ms Latency
 
 ### How to use
-1\. Install the [YouTube15-Helper chrome extension](https://github.com/haidarn2/Youtube15/releases/download/1.0/YouTube15-Helper_v1.0.crx)  By drag & dropping it into the chrome://extensions page.
+1\. Install the [YouTube15-Helper chrome extension](https://chrome.google.com/webstore/detail/youtube15-chrome-helper/mhlihjndbfelgbinhmdedmafmfcpndcj) from the Google Chrome webstore.
 
+![webstore image](http://i.imgur.com/04oMR5l.png)
 ![install Youtube15-Helper to chrome](http://i.imgur.com/LE7yJQz.png)
 
 2\. Download [YouTube15](https://github.com/haidarn2/Youtube15/releases/download/1.0/YouTube15_v1.0.zip).
