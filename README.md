@@ -40,4 +40,4 @@ Based on the Spoti15 source code.
 *A: Sorry only Chrome at the moment, if you want to create your own YouTube15-Helper extension for firefox, check the chrome extension sourcecode [here](https://github.com/haidarn2/Youtube15/tree/master/YouTube15-Helper).*
       
 #### Q: Cool! Can you make something similar for Spotify?
-*A : Actually, this was based on the Spotify Applet Spoti15, which I'm now maintaining*
+*A : Actually, this was based on the Spotify Applet; Spoti15, which I'm now maintaining [here](https://github.com/haidarn2/Spoti15).*
