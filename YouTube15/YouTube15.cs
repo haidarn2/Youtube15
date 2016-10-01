@@ -10,6 +10,7 @@ namespace YouTube15
     class YouTube15
     {
         //private SpotifyLocalAPI api;
+        private YouTubeAPI api;
         private Exception initExcpt;
 
         private LogiLcd lcd;
@@ -24,7 +25,7 @@ namespace YouTube15
         {
             initExcpt = null;
 
-            InitSpot();
+            InitYoutube();
 
             lcd = new LogiLcd("YouTube15");
 
@@ -57,7 +58,7 @@ namespace YouTube15
         {
             bool btnNow = lcd.IsButtonPressed(LogiLcd.LcdButton.Mono0);
             if (btnNow && !btnBefore)
-                InitSpot();
+                InitYoutube();
             btnBefore = btnNow;
 
             UpdateLcd();
@@ -66,7 +67,7 @@ namespace YouTube15
 
         private void OnRefreshTimer(object source, EventArgs e)
         {
-            InitSpot();
+            InitYoutube();
         }
 
         public void Dispose()
@@ -88,14 +89,12 @@ namespace YouTube15
             initExcpt = null;
         }
 
-        private void InitSpot()
+        private void InitYoutube()
         {
             try
             {
-                //if (api == null)
-                   // api = new SpotifyLocalAPI();
-               // if (!api.Connect())
-                    //throw new Exception ("Is Spotify Even Running?");
+                if (api == null)
+                    api = new YouTubeAPI();
                 initExcpt = null;
             }
             catch (Exception e)
@@ -212,27 +211,29 @@ namespace YouTube15
                 {
                     //StatusResponse status = api.GetStatus();
                     //int len = status.Track.Length;
+                    int len = (int)double.Parse(api.getDuration());
                     //int pos = (int)status.PlayingPosition;
-                    // double perc = status.PlayingPosition / status.Track.Length;
+                    int pos = (int)double.Parse(api.getCurrentTime()); 
+                    double perc = double.Parse(api.getCurrentTime()) / double.Parse(api.getDuration());
 
                     // DrawTextScroll(g, 0, status.Track.ArtistResource.Name + " - " + status.Track.AlbumResource.Name);
-                    DrawTextScroll(g, 0, "LINE 0");
+                    DrawTextScroll(g, 0, api.getVideoTitle());
                     // DrawTextScroll(g, 1, status.Track.TrackResource.Name);
-                    DrawTextScroll(g, 1, "LINE 1");
-                    //DrawTextScroll(g, 3, String.Format("{0}:{1:D2}/{2}:{3:D2}", pos / 60, pos % 60, len / 60, len % 60));
+                    DrawTextScroll(g, 1, api.getUploader());
+                    DrawTextScroll(g, 3, String.Format("{0}:{1:D2}/{2}:{3:D2}", pos / 60, pos % 60, len / 60, len % 60));
 
-                    // g.DrawRectangle(Pens.White, 3, 24, LogiLcd.MonoWidth - 6, 4);
-                    //g.FillRectangle(Brushes.White, 3, 24, (int)((LogiLcd.MonoWidth - 6) * perc), 4);
+                    g.DrawRectangle(Pens.White, 3, 24, LogiLcd.MonoWidth - 6, 4);
+                    g.FillRectangle(Brushes.White, 3, 24, (int)((LogiLcd.MonoWidth - 6) * perc), 4);
 
-                    // if (status.Playing)
-                    // {
-                    //     g.FillPolygon(Brushes.White, new Point[] { new Point(3, 40), new Point(3, 30), new Point(8, 35) });
-                    //}
-                    // else
-                    // {
-                    //     g.FillRectangle(Brushes.White, new Rectangle(3, 32, 2, 7));
-                    //     g.FillRectangle(Brushes.White, new Rectangle(6, 32, 2, 7));
-                    // }
+                    if (api.playing())
+                    {
+                         g.FillPolygon(Brushes.White, new Point[] { new Point(3, 40), new Point(3, 30), new Point(8, 35) });
+                    }
+                     else
+                     {
+                         g.FillRectangle(Brushes.White, new Rectangle(3, 32, 2, 7));
+                         g.FillRectangle(Brushes.White, new Rectangle(6, 32, 2, 7));
+                     }
                 }
                 catch (NullReferenceException)
                 {

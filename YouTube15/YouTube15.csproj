@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autostart.cs" />
+    <Compile Include="YouTubeAPI.cs" />
     <Compile Include="LcdPinvoke.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
