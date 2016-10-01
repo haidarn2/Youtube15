@@ -9,7 +9,7 @@ namespace YouTube15
     class Autostart
     {
         private const string RunLocation = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        private const string KeyName = "Spoti15Autostart";
+        private const string KeyName = "YouTube15Autostart";
 
         static private string RunValue()
         {

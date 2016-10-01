@@ -141,7 +141,7 @@ namespace YouTube15
             cm.MenuItems.Add(menu);
 
             notico = new NotifyIcon();
-            notico.Text = "Spoti15";
+            notico.Text = "YouTube15";
             notico.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             notico.ContextMenu = cm;
             notico.Visible = !Properties.Settings.Default.HideIcon;

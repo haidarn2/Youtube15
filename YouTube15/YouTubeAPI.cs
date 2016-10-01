@@ -23,7 +23,9 @@ namespace YouTube15
             _listener.Prefixes.Add("http://127.0.0.1:60024/");
             _listener.Start();
             _listener.BeginGetContext(new AsyncCallback(ProcessRequest), null);
-            videos.Add("12345", new YoutubeVideo("12345", "No video", "Nima158"));
+
+            // add dummy video
+            videos.Add("12345", new YoutubeVideo("12345", "Dummy video title", "Dummy video uploader"));
             priorityList.Add("12345");
         }
 
@@ -67,7 +69,7 @@ namespace YouTube15
                 }
                 else { video.paused = paused; }
 
-                
+                // terminate flag is on, so tab or window was closed.
                 if (terminate)
                 {
                     videos.Remove(id);
@@ -110,6 +112,11 @@ namespace YouTube15
             return videos[priorityList.Last()].playing();
         }
 
+        public Boolean noVideoDetected()
+        {
+            return videos[priorityList.Last()].getID() == "12345";
+        }
+
         private class YoutubeVideo
         {
             private String  id, videoTitle, uploader, currentTime, duration;
@@ -120,7 +127,7 @@ namespace YouTube15
                 this.videoTitle = videoTitle;
                 this.uploader = uploader;
                 this.currentTime = "0";
-                this.duration = "1";
+                this.duration = "0";
                 this.paused = true;
             }
 

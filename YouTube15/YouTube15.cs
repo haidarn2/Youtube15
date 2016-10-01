@@ -209,16 +209,20 @@ namespace YouTube15
 
                 try
                 {
-                    //StatusResponse status = api.GetStatus();
-                    //int len = status.Track.Length;
+                    // no youtube video detected.
+                    if (api.noVideoDetected())
+                    {
+                        g.Clear(bgColor);
+                        DrawTextScroll(g, 1, "No YouTube videos detected.", true);
+                        DoRender();
+                        return;
+                    }
+
                     int len = (int)double.Parse(api.getDuration());
-                    //int pos = (int)status.PlayingPosition;
                     int pos = (int)double.Parse(api.getCurrentTime()); 
                     double perc = double.Parse(api.getCurrentTime()) / double.Parse(api.getDuration());
 
-                    // DrawTextScroll(g, 0, status.Track.ArtistResource.Name + " - " + status.Track.AlbumResource.Name);
                     DrawTextScroll(g, 0, api.getVideoTitle());
-                    // DrawTextScroll(g, 1, status.Track.TrackResource.Name);
                     DrawTextScroll(g, 1, api.getUploader());
                     DrawTextScroll(g, 3, String.Format("{0}:{1:D2}/{2}:{3:D2}", pos / 60, pos % 60, len / 60, len % 60));
 
@@ -238,7 +242,7 @@ namespace YouTube15
                 catch (NullReferenceException)
                 {
                     g.Clear(bgColor);
-                    DrawTextScroll(g, 1, "No track information available", false);
+                    DrawTextScroll(g, 1, "An error has occured.", true);
                 }
             }
 
