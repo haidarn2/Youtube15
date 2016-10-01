@@ -50,6 +50,11 @@ namespace YouTube15
                 if (json.duration != null)
                     video.setDuration((string)json.duration);
                 video.paused = json.paused;
+                if ((bool)json.terminate)
+                {
+                    videos.Remove(video.getID());
+                    priorityList.Remove(video.getID());
+                }
             }
             else
             {
