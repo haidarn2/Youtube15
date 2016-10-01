@@ -14,6 +14,7 @@ namespace YouTube15
         private HttpListener _listener;
 
         private Dictionary<string, YoutubeVideo> videos = new Dictionary<string, YoutubeVideo>();
+
         private List<string> priorityList = new List<string>();
 
         public YouTubeAPI()
@@ -41,19 +42,36 @@ namespace YouTube15
 
             dynamic json = JObject.Parse(data);
 
+            string id = (string) json.id;
+            string title = (string) json.title;
+            string uploader = (string) json.uploader;
+            string currentTime = (string) json.currentTime;
+            string duration = (string) json.duration;
+            bool paused = (bool) json.paused;
+            bool terminate = (bool) json.terminate;
             
-            if (videos.ContainsKey((string)json.id))
+            if (videos.ContainsKey(id))
             {
-                YoutubeVideo video = videos[(string)json.id];
-                if (json.currentTime != null)
-                    video.setCurrentTime((string)json.currentTime);
-                if (json.duration != null)
-                    video.setDuration((string)json.duration);
-                video.paused = json.paused;
-                if ((bool)json.terminate)
+                YoutubeVideo video = videos[id];
+                if (currentTime != null)
+                    video.setCurrentTime(currentTime);
+                if (duration != null)
+                    video.setDuration(duration);
+
+                // video is now unpaused, takes priority.
+                if (!paused && video.paused)
                 {
-                    videos.Remove(video.getID());
-                    priorityList.Remove(video.getID());
+                    video.paused = false;
+                    priorityList.Remove(id);
+                    priorityList.Add(id);
+                }
+                else { video.paused = paused; }
+
+                
+                if (terminate)
+                {
+                    videos.Remove(id);
+                    priorityList.Remove(id);
                 }
             }
             else
