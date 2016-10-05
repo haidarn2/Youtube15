@@ -132,7 +132,7 @@ namespace YouTube15
         {
             int x = offset;
             int y = line * 10;
-            TextRenderer.DrawText(g, text, fnt, new Point(x, y), fgColor);
+            TextRenderer.DrawText(g, text, fnt, new Point(x, y), fgColor, TextFormatFlags.NoPrefix);
         }
 
         private void DrawTextScroll(Graphics g, int line, string text, Font fnt, bool center = true)
