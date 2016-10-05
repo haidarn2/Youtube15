@@ -18,7 +18,7 @@ Based on the Spoti15 source code.
 ![webstore image](http://i.imgur.com/04oMR5l.png)
 ![install Youtube15-Helper to chrome](http://i.imgur.com/LE7yJQz.png)
 
-2\. Download [YouTube15](https://github.com/haidarn2/Youtube15/releases/download/1.0/YouTube15_v1.0.zip).
+2\. Download [YouTube15](https://github.com/haidarn2/Youtube15/releases/download/1.1/YouTube15_v1.1.zip).
 
 ![run YouTube15.exe](http://i.imgur.com/4LvhtsM.png)
 
