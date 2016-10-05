@@ -213,7 +213,8 @@ namespace YouTube15
                     if (api.noVideoDetected())
                     {
                         g.Clear(bgColor);
-                        DrawTextScroll(g, 1, "No YouTube videos detected.", true);
+                        DrawTextScroll(g, 1, "YouTube15", true);
+                        DrawTextScroll(g, 2, DateTime.Now.ToString("h:mm tt"), true);
                         DoRender();
                         return;
                     }
