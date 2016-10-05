@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "YouTube15 Chrome Helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sends YouTube video info to YouTube15 (Applet for Logitech G15)",
   "permissions": ["tabs", "*://*.youtube.com/watch*", "http://127.0.0.1/"],
    "icons": { 

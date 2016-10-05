@@ -52,7 +52,7 @@ function sendData(title, uploader, currentTime, duration, paused, terminate){
 		"paused" : paused,
 		"terminate": terminate
     };
-	console.log(id + " " + title + " " + terminate);
+	//console.log(id + " " + title + " " + terminate);
 	//console.log(JSON.stringify(data));
 	xhttp.send(JSON.stringify(data));
 	//return xhttp.status;
