@@ -1,0 +1,20 @@
+{
+  "title": "YouTube15-Helper",
+  "name": "youtube15-helperfirefox",
+  "version": "1.0.2",
+  "description": "Sends YouTube video info to YouTube15 (Applet for Logitech G15)",
+  "main": "index.js",
+  "author": "Nadeem Haidar",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "permissions": {
+  "multiprocess": true,
+    "cross-domain-content": ["https://www.youtube.com/", "http://127.0.0.1/:60024"]
+},
+  "license": "MIT",
+  "keywords": [
+    "jetpack"
+  ]
+}
