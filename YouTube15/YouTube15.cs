@@ -111,7 +111,7 @@ namespace YouTube15
         }
 
         private Bitmap bgBitmap = new Bitmap(LogiLcd.MonoWidth, LogiLcd.MonoHeight);
-        private Font mainFont = new Font(Program.GetFontFamily("8pxbus"), 10, GraphicsUnit.Pixel);
+        private Font mainFont = new Font(Program.GetFontFamily("11pxbus"), 11, GraphicsUnit.Pixel);
         private Color bgColor = Color.Black;
         private Color fgColor = Color.White;
         private Brush bgBrush = Brushes.Black;
