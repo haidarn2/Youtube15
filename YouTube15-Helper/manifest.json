@@ -11,7 +11,7 @@
 	}, 
   "content_scripts": [
     {
-	  "run_at": "document_end",
+	  "run_at": "document_start",
       "matches": ["*://*.youtube.com/*"],
       "js": ["YouTube15.js"]
     }

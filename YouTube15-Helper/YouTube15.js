@@ -1,27 +1,48 @@
-var id = uniqueId();
+var id;
+var repeat;
+var title;
+var uploader;
+var video;
 
-var title = document.getElementsByClassName("watch-title")[0].getAttribute("title");
+// event listeners for Youtube javascript page traversal.
+document.addEventListener("spfdone", process);
+document.addEventListener("DOMContentLoaded", process);
 
-var uploader = document.getElementsByClassName("yt-user-info")[0].innerText;
-
-var video = document.getElementsByTagName("video")[0];
-
-var timeout = 0;
-
-var repeat = setInterval(function() {
-    sendData(title, uploader, video.currentTime, video.duration, video.paused, false);
-}, 500);
-
+function process(){
+	stop();
+	start();
+}
+	
+// Detect tab/window close
 window.onbeforeunload = function () {
-    clearInterval(repeat);
-	// send termination flag when tab or browser is closing.
-	sendData(title, uploader, video.currentTime, video.duration, video.paused, true);
+	stop();
 };
+
+
+function start(){
+	title = document.getElementsByClassName("watch-title")[0].getAttribute("title");
+	uploader = document.getElementsByClassName("yt-user-info")[0].innerText;
+	video = document.getElementsByTagName("video")[0];
+	if (title && uploader && video){		
+		id = uniqueId();
+		repeat = setInterval(function() {
+		sendData(title, uploader, video.currentTime, video.duration, video.paused, false);
+	}, 500);
+	}
+}
+
+function stop(){
+	if (repeat != null){
+		clearInterval(repeat);
+		sendData(title, uploader, video.currentTime, video.duration, video.paused, true);
+	}
+	repeat = null;
+}
 
 function sendData(title, uploader, currentTime, duration, paused, terminate){
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("POST", "http://127.0.0.1:60024/", true);
-	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	//xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	var data = {
 		"id" : id,
         "title" : title,
@@ -31,6 +52,8 @@ function sendData(title, uploader, currentTime, duration, paused, terminate){
 		"paused" : paused,
 		"terminate": terminate
     };
+	console.log(id + " " + title + " " + terminate);
+	//console.log(JSON.stringify(data));
 	xhttp.send(JSON.stringify(data));
 	//return xhttp.status;
 }
