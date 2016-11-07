@@ -20,6 +20,7 @@ namespace YouTube15
         private Timer refreshTimer;
 
         private uint scrollStep = 0;
+        private bool showAnimatedLines = true;
 
         public YouTube15()
         {
@@ -53,16 +54,24 @@ namespace YouTube15
             UpdateSpot();
         }
 
-        private bool btnBefore = false;
+        private bool btn0Before = false;
+        //private bool btn3Before = false;
+        private bool btn2Before = false;
         private void OnLcdTimer(object source, EventArgs e)
         {
-            bool btnNow = lcd.IsButtonPressed(LogiLcd.LcdButton.Mono0);
-            if (btnNow && !btnBefore)
+            bool btn0Now = lcd.IsButtonPressed(LogiLcd.LcdButton.Mono0);
+            if (btn0Now && !btn0Before)
                 InitYoutube();
-            btnBefore = btnNow;
+            btn0Before = btn0Now;
 
             UpdateLcd();
             scrollStep += 1;
+
+            // toggle animated lines within progress bar
+            bool btn2Now = lcd.IsButtonPressed(LogiLcd.LcdButton.Mono2);
+            if (btn2Now && !btn2Before)
+                showAnimatedLines = !showAnimatedLines;
+            btn2Before = btn2Now;
         }
 
         private void OnRefreshTimer(object source, EventArgs e)
@@ -235,12 +244,15 @@ namespace YouTube15
                     g.FillRectangle(Brushes.White, 3, 24, (int)((LogiLcd.MonoWidth - 6) * perc), 4);
 
                     // draw animated lines within progress bar
-                    if (lineTrack > 8)
-                        lineTrack = 4;
-                    else
-                        lineTrack++;
-                    for (int x = lineTrack; x < LogiLcd.MonoWidth - 6; x += 6)
-                        g.DrawLine(Pens.Black, new Point(x, 26), new Point(x + 2, 26));
+                    if (showAnimatedLines)
+                    {
+                        if (lineTrack > 8)
+                            lineTrack = 4;
+                        else
+                            lineTrack++;
+                        for (int x = lineTrack; x < LogiLcd.MonoWidth - 6; x += 6)
+                            g.DrawLine(Pens.Black, new Point(x, 26), new Point(x + 2, 26));
+                    }
 
                     if (api.playing())
                     {
