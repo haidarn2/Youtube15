@@ -132,6 +132,8 @@ namespace YouTube15
         {
             int x = offset;
             int y = line * 10;
+            if (line == 0)
+                y -= 1; // offset first line 3 pixels up
             TextRenderer.DrawText(g, text, fnt, new Point(x, y), fgColor, TextFormatFlags.NoPrefix);
         }
 
