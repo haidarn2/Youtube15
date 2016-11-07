@@ -227,7 +227,7 @@ namespace YouTube15
 
                     DrawTextScroll(g, 0, api.getVideoTitle());
                     DrawTextScroll(g, 1, api.getUploader());
-                    DrawTextScroll(g, 3, String.Format("{0}:{1:D2}/{2}:{3:D2}", pos / 60, pos % 60, len / 60, len % 60));
+                    DrawTextScroll(g, 3, String.Format("{0}:{1:D2} / {2}:{3:D2}", pos / 60, pos % 60, len / 60, len % 60));
 
                     g.DrawRectangle(Pens.White, 3, 24, LogiLcd.MonoWidth - 6, 4);
                     g.FillRectangle(Brushes.White, 3, 24, (int)((LogiLcd.MonoWidth - 6) * perc), 4);
