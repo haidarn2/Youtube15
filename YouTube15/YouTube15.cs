@@ -234,12 +234,12 @@ namespace YouTube15
 
                     if (api.playing())
                     {
-                         g.FillPolygon(Brushes.White, new Point[] { new Point(3, 40), new Point(3, 30), new Point(8, 35) });
+                         g.FillPolygon(Brushes.White, new Point[] { new Point(3, 42), new Point(3, 32), new Point(8, 37) });
                     }
                      else
                      {
-                         g.FillRectangle(Brushes.White, new Rectangle(3, 32, 2, 7));
-                         g.FillRectangle(Brushes.White, new Rectangle(6, 32, 2, 7));
+                         g.FillRectangle(Brushes.White, new Rectangle(3, 34, 2, 7));
+                         g.FillRectangle(Brushes.White, new Rectangle(6, 34, 2, 7));
                      }
                 }
                 catch (NullReferenceException)
