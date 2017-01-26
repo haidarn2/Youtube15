@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Globalization;
 
 namespace YouTube15
 {
@@ -21,6 +22,9 @@ namespace YouTube15
 
         private uint scrollStep = 0;
         private bool showAnimatedLines = true;
+
+        private CultureInfo dotDecimal = CultureInfo.CreateSpecificCulture("en-us");
+        private CultureInfo commaDecimal = CultureInfo.CreateSpecificCulture("en-de");
 
         public YouTube15()
         {
@@ -231,9 +235,30 @@ namespace YouTube15
                         return;
                     }
 
-                    int len = (int)double.Parse(api.getDuration());
-                    int pos = (int)double.Parse(api.getCurrentTime()); 
-                    double perc = double.Parse(api.getCurrentTime()) / double.Parse(api.getDuration());
+
+
+                    double d_len = 0;
+                    double d_pos = 0;
+                    double perc = 0;
+
+
+                    // Parse api data using en-us localized decimal
+                    if (Double.TryParse(api.getDuration(), NumberStyles.AllowDecimalPoint, dotDecimal, out d_len))
+                    {
+                        Double.TryParse(api.getCurrentTime(), NumberStyles.AllowDecimalPoint, dotDecimal, out d_pos);
+                    }
+                    else // otherwise try en-de comma decimal.
+                    {
+                        Double.TryParse(api.getDuration(), NumberStyles.AllowDecimalPoint, commaDecimal, out d_len);
+                        Double.TryParse(api.getCurrentTime(), NumberStyles.AllowDecimalPoint, commaDecimal, out d_pos);
+                    }
+
+                    int len = (int) d_len;
+                    int pos = (int) d_pos;
+
+                    // calculate video completion percentage
+                    if (d_len > 0)
+                        perc = d_pos/d_len;
 
                     DrawTextScroll(g, 0, api.getVideoTitle());
                     DrawTextScroll(g, 1, api.getUploader());
