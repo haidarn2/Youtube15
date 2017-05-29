@@ -45,6 +45,9 @@ YouTube iframe metadata is passed to this applet via the YouTube15-Helper Chrome
 #### Q: Help! the applet is not detecting YouTube videos anymore (or displaying them incorrectly)!
 *A: YouTube periodically changes their page layouts so theres a possibility that the YouTube15-Helper needs updating, please submit an [issue](https://github.com/haidarn2/Youtube15/issues) if this happens. The YouTube15-Helper should be updated automatically through your browser when I push an update.*
 
+#### Q: I'm getting weird values for the current video time/duration, help!
+*A: This is an issue with parsing international decimal points eg `50,03` seconds vs `50.03` seconds. Support for international decimal points was added in v1.3 so please update.*
+
 
 #### Q: Cool! Can you make something similar for Spotify?
 *A : Actually, this was based on the Spotify Applet; Spoti15, which I'm now maintaining [here](https://github.com/haidarn2/Spoti15).*
